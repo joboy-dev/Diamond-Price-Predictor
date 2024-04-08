@@ -11,77 +11,120 @@ with open('diamond.pickle', mode='rb') as model_file:
 def predict_price(carat, depth, table, x_length, y_length, z_length, cut, color, clarity):
     '''Function to predict price'''
     
-    # CUT
-    if cut == 'Fair':
-        cut_fair = 1
-        cut_good, cut_vgood, cut_premium, cut_ideal = 0,0,0,0
-    elif cut == 'Good':
-        cut_good = 1
-        cut_fair, cut_vgood, cut_premium, cut_ideal = 0,0,0,0
-    elif cut == 'Very Good':
-        cut_vgood = 1
-        cut_fair, cut_good, cut_premium, cut_ideal = 0,0,0,0
-    elif cut == 'Premium':
-        cut_premium = 1
-        cut_fair, cut_good, cut_vgood, cut_ideal = 0,0,0,0
-    elif cut == 'Ideal':
-        cut_ideal = 1
-        cut_fair, cut_good, cut_premium, cut_vgood = 0,0,0,0
+#     # CUT
+#     if cut == 'Fair':
+#         cut_fair = 1
+#         cut_good, cut_vgood, cut_premium, cut_ideal = 0,0,0,0
+#     elif cut == 'Good':
+#         cut_good = 1
+#         cut_fair, cut_vgood, cut_premium, cut_ideal = 0,0,0,0
+#     elif cut == 'Very Good':
+#         cut_vgood = 1
+#         cut_fair, cut_good, cut_premium, cut_ideal = 0,0,0,0
+#     elif cut == 'Premium':
+#         cut_premium = 1
+#         cut_fair, cut_good, cut_vgood, cut_ideal = 0,0,0,0
+#     elif cut == 'Ideal':
+#         cut_ideal = 1
+#         cut_fair, cut_good, cut_premium, cut_vgood = 0,0,0,0
         
-    # COLOR
-    if color == 'G':
-        color_G = 1
-        color_E, color_F, color_H, color_D, color_I, color_J = 0,0,0,0,0,0
-    elif color == 'E':
-        color_E = 1
-        color_G, color_F, color_H, color_D, color_I, color_J = 0,0,0,0,0,0
-    elif color == 'F':
-        color_F = 1
-        color_G, color_E, color_H, color_D, color_I, color_J = 0,0,0,0,0,0
-    elif color == 'H':
-        color_H = 1
-        color_G, color_F, color_E, color_D, color_I, color_J = 0,0,0,0,0,0
-    elif color == 'D':
-        color_D = 1
-        color_G, color_F, color_H, color_E, color_I, color_J = 0,0,0,0,0,0
-    elif color == 'I':
-        color_I = 1
-        color_G, color_F, color_H, color_D, color_E, color_J = 0,0,0,0,0,0
-    elif color == 'J':
-        color_J = 1
-        color_G, color_F, color_H, color_D, color_I, color_E = 0,0,0,0,0,0
+#     # COLOR
+#     if color == 'G':
+#         color_G = 1
+#         color_E, color_F, color_H, color_D, color_I, color_J = 0,0,0,0,0,0
+#     elif color == 'E':
+#         color_E = 1
+#         color_G, color_F, color_H, color_D, color_I, color_J = 0,0,0,0,0,0
+#     elif color == 'F':
+#         color_F = 1
+#         color_G, color_E, color_H, color_D, color_I, color_J = 0,0,0,0,0,0
+#     elif color == 'H':
+#         color_H = 1
+#         color_G, color_F, color_E, color_D, color_I, color_J = 0,0,0,0,0,0
+#     elif color == 'D':
+#         color_D = 1
+#         color_G, color_F, color_H, color_E, color_I, color_J = 0,0,0,0,0,0
+#     elif color == 'I':
+#         color_I = 1
+#         color_G, color_F, color_H, color_D, color_E, color_J = 0,0,0,0,0,0
+#     elif color == 'J':
+#         color_J = 1
+#         color_G, color_F, color_H, color_D, color_I, color_E = 0,0,0,0,0,0
         
-    # CLARITY
-    if clarity == 'SI1':
-        clarity_SI1 = 1
-        clarity_SI2, clarity_VS1, clarity_VS2, clarity_VVS1, clarity_VVS2, clarity_IF, clarity_I1 = 0,0,0,0,0,0,0
-    elif clarity == 'SI2':
-        clarity_SI2 = 1
-        clarity_SI1, clarity_VS1, clarity_VS2, clarity_VVS1, clarity_VVS2, clarity_IF, clarity_I1 = 0,0,0,0,0,0,0
-    elif clarity == 'VS1':
-        clarity_VS1 = 1
-        clarity_SI2, clarity_SI1, clarity_VS2, clarity_VVS1, clarity_VVS2, clarity_IF, clarity_I1 = 0,0,0,0,0,0,0
-    elif clarity == 'VS2':
-        clarity_VS2 = 1
-        clarity_SI2, clarity_VS1, clarity_SI1, clarity_VVS1, clarity_VVS2, clarity_IF, clarity_I1 = 0,0,0,0,0,0,0
-    elif clarity == 'VVS1':
-        clarity_VVS1 = 1
-        clarity_SI2, clarity_VS1, clarity_VS2, clarity_SI1, clarity_VVS2, clarity_IF, clarity_I1 = 0,0,0,0,0,0,0
-    elif clarity == 'VVS2':
-        clarity_VVS2 = 1
-        clarity_SI2, clarity_VS1, clarity_VS2, clarity_VVS1, clarity_SI1, clarity_IF, clarity_I1 = 0,0,0,0,0,0,0
-    elif clarity == 'IF':
-        clarity_IF = 1
-        clarity_SI2, clarity_VS1, clarity_VS2, clarity_VVS1, clarity_VVS2, clarity_SI1, clarity_I1 = 0,0,0,0,0,0,0
-    elif clarity == 'I1':
-        clarity_I1 = 1
-        clarity_SI2, clarity_VS1, clarity_VS2, clarity_VVS1, clarity_VVS2, clarity_IF, clarity_SI1 = 0,0,0,0,0,0,0
+#     # CLARITY
+#     if clarity == 'SI1':
+#         clarity_SI1 = 1
+#         clarity_SI2, clarity_VS1, clarity_VS2, clarity_VVS1, clarity_VVS2, clarity_IF, clarity_I1 = 0,0,0,0,0,0,0
+#     elif clarity == 'SI2':
+#         clarity_SI2 = 1
+#         clarity_SI1, clarity_VS1, clarity_VS2, clarity_VVS1, clarity_VVS2, clarity_IF, clarity_I1 = 0,0,0,0,0,0,0
+#     elif clarity == 'VS1':
+#         clarity_VS1 = 1
+#         clarity_SI2, clarity_SI1, clarity_VS2, clarity_VVS1, clarity_VVS2, clarity_IF, clarity_I1 = 0,0,0,0,0,0,0
+#     elif clarity == 'VS2':
+#         clarity_VS2 = 1
+#         clarity_SI2, clarity_VS1, clarity_SI1, clarity_VVS1, clarity_VVS2, clarity_IF, clarity_I1 = 0,0,0,0,0,0,0
+#     elif clarity == 'VVS1':
+#         clarity_VVS1 = 1
+#         clarity_SI2, clarity_VS1, clarity_VS2, clarity_SI1, clarity_VVS2, clarity_IF, clarity_I1 = 0,0,0,0,0,0,0
+#     elif clarity == 'VVS2':
+#         clarity_VVS2 = 1
+#         clarity_SI2, clarity_VS1, clarity_VS2, clarity_VVS1, clarity_SI1, clarity_IF, clarity_I1 = 0,0,0,0,0,0,0
+#     elif clarity == 'IF':
+#         clarity_IF = 1
+#         clarity_SI2, clarity_VS1, clarity_VS2, clarity_VVS1, clarity_VVS2, clarity_SI1, clarity_I1 = 0,0,0,0,0,0,0
+#     elif clarity == 'I1':
+#         clarity_I1 = 1
+#         clarity_SI2, clarity_VS1, clarity_VS2, clarity_VVS1, clarity_VVS2, clarity_IF, clarity_SI1 = 0,0,0,0,0,0,0
     
-    X_test = np.array([[carat, depth, table, x_length, y_length, z_length, cut_fair, cut_good, cut_vgood, cut_premium, cut_ideal, color_G, color_E, color_F, color_H, color_D, color_I, color_J, clarity_SI1, clarity_SI2, clarity_VS1, clarity_VS2, clarity_VVS1, clarity_VVS2, clarity_IF, clarity_I1]])
+#     X_test = np.array([[carat, depth, table, x_length, y_length, z_length, cut_fair, cut_good, cut_vgood, cut_premium, cut_ideal, color_G, color_E, color_F, color_H, color_D, color_I, color_J, clarity_SI1, clarity_SI2, clarity_VS1, clarity_VS2, clarity_VVS1, clarity_VVS2, clarity_IF, clarity_I1]])
     
+#     y_predict = model.predict(X_test)
+    
+#     return y_predict
+
+    # Define mappings for cut, color, and clarity
+    cut_mapping = {
+        'Fair': [1, 0, 0, 0, 0],
+        'Good': [0, 1, 0, 0, 0],
+        'Very Good': [0, 0, 1, 0, 0],
+        'Premium': [0, 0, 0, 1, 0],
+        'Ideal': [0, 0, 0, 0, 1]
+    }
+    
+    color_mapping = {
+        'G': [1, 0, 0, 0, 0, 0, 0],
+        'E': [0, 1, 0, 0, 0, 0, 0],
+        'F': [0, 0, 1, 0, 0, 0, 0],
+        'H': [0, 0, 0, 1, 0, 0, 0],
+        'D': [0, 0, 0, 0, 1, 0, 0],
+        'I': [0, 0, 0, 0, 0, 1, 0],
+        'J': [0, 0, 0, 0, 0, 0, 1]
+    }
+    
+    clarity_mapping = {
+        'SI1': [1, 0, 0, 0, 0, 0, 0],
+        'SI2': [0, 1, 0, 0, 0, 0, 0],
+        'VS1': [0, 0, 1, 0, 0, 0, 0],
+        'VS2': [0, 0, 0, 1, 0, 0, 0],
+        'VVS1': [0, 0, 0, 0, 1, 0, 0],
+        'VVS2': [0, 0, 0, 0, 0, 1, 0],
+        'IF': [0, 0, 0, 0, 0, 0, 1]
+    }
+    
+    # Extract one-hot encoded values
+    cut_encoded = cut_mapping.get(cut, [0, 0, 0, 0, 0])
+    color_encoded = color_mapping.get(color, [0, 0, 0, 0, 0, 0, 0])
+    clarity_encoded = clarity_mapping.get(clarity, [0, 0, 0, 0, 0, 0, 0])
+    
+    # Create input array
+    X_test = np.array([[carat, depth, table, x_length, y_length, z_length] + cut_encoded + color_encoded + clarity_encoded])
+    
+    # Make prediction
     y_predict = model.predict(X_test)
     
     return y_predict
+
 
 st.title('Diamond Price Predictor')
 st.write('An ML application to predict diamond prices. This is especially useful for customers and diamond dealers.')
